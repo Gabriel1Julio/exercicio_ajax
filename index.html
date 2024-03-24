@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Github</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img class="profile-avatar" src="https://via.placeholder.com/180x180" id="imagemPerfil" alt=".">
+            <h1 class="profile-name" id="profile_name"></h1>
+            <h2 class="profile-username" id="username">@</h2>
+            <ul class="numbers">
+                <li class="numbers-item">
+                    <h4>Repositórios</h4>
+                    <span id="repositorios"></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguidores</h4>
+                    <span id="seguidores"></span>
+                </li>
+                <li class="numbers-item">
+                    <h4>Seguindo</h4>
+                    <span id="seguindo"></span>
+                </li>
+            </ul>
+            <a href="" id="profile-link" class="profile-link">Ver no Github</a>
+        </div>
+    </header>
+
+    <script src="jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            const endpoint = 'https://api.github.com/users/Gabriel1Julio';
+            const imagemPerfil = $('#imagemPerfil');
+            const nomePerfil = $('#profile_name');
+            const username = $('#username');
+            const repositorios = $('#repositorios'); 
+            const seguidores = $('#seguidores'); 
+            const seguindo = $('#seguindo');
+            const link = $('#profile-link')
+            
+            fetch(endpoint).then(function(resposta){
+                return resposta.json();
+            }).then(function(json){
+                nomePerfil.text(json.name);
+                imagemPerfil.attr('src', json.avatar_url);
+                username.text(json.login);
+                repositorios.text(json.public_repos);
+                seguidores.text(json.followers);
+                seguindo.text(json.following);
+                link.attr('href', json.html_url);
+            })
+        })
+    </script>
+</body>
+</html>
