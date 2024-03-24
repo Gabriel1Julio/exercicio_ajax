@@ -34,7 +34,7 @@
     <script src="jquery.js"></script>
     <script>
         $(document).ready(function(){
-            const endpoint = 'https://api.github.com/users/Gabriel1Julio';
+            const endpoint = 'https://api.github.com/users/Gabriel1Julio921y38721';
             const imagemPerfil = $('#imagemPerfil');
             const nomePerfil = $('#profile_name');
             const username = $('#username');
@@ -53,7 +53,11 @@
                 seguidores.text(json.followers);
                 seguindo.text(json.following);
                 link.attr('href', json.html_url);
-            })
+            }).catch(function(){
+                throw new Error('Ocorreu um erro ao conectar ao GitHub volte e tente novamente mais tarde!')
+            }) .finally(function(){
+                console.log("Requisição ao GitHub finalizada.");
+            });
         })
     </script>
 </body>
